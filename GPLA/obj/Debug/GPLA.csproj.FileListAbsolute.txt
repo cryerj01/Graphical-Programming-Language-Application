@@ -1,0 +1,9 @@
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\obj\Debug\GPLA.Form1.resources
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\obj\Debug\GPLA.Properties.Resources.resources
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\obj\Debug\GPLA.csproj.GenerateResource.cache
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\bin\Debug\GPLA.exe.config
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\bin\Debug\GPLA.exe
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\bin\Debug\GPLA.pdb
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\obj\Debug\GPLA.exe
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\obj\Debug\GPLA.pdb
+C:\Users\Joe\Desktop\GPLA\GPLA\GPLA\obj\Debug\GPLA.csprojAssemblyReference.cache
