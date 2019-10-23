@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -35,62 +36,73 @@ namespace GPLA
 
         private void button3_Click(object sender, EventArgs e)
         {
-            String input = command.Text;
+            String input = ControlePanel.Text;
             if (input.Trim() == "")
             {
                 MessageBox.Show("Enter a command", "ERROR");
             }
             else
             {
-                input = command.Text.Trim();
-                int x = 0;
+               String[] lines = ControlePanel.Lines.ToArray();
+                
+               
+                int count = 0;
                 using (var g = Graphics.FromImage(display.Image))
-                {
-                    Pen myPen = new Pen(Color.Pink, 2);
-                    switch (input.ToLower())
-                    {
-                        case "circle":
-                            MessageBox.Show("You Drew a Circle", "Messgae");
 
-
-                            g.DrawEllipse(myPen, 50, 50, 200, 100);
-                            
-
-                            break;
-                        case "rectangle":
-                            MessageBox.Show("You Drew a Rectangle", "Message");
-                            g.DrawRectangle(myPen,0, 0, 50, 20);
-                            break;
-                        case "squear":
-                            MessageBox.Show("You Drew a Rectangle", "Message");
-                            g.DrawRectangle(myPen, 0, 30, 50, 50);
-                            break;
-
-                        case "line":
-                            MessageBox.Show("Your Drew a Line", "Message");
-                            g.DrawLine(myPen, 0, 20, 20, 50);
-                            break;
-                        case "clear":
-                            g.Clear(Color.Transparent);
-                            break;
-                        default:
-                            MessageBox.Show("This is not a Shape", "MEessgae");
-                            x = -1;
-                            break;
-
-                    }
-                    display.Refresh();
                     
-                } if (x == -1)
-                {
+                    while (lines.Length >= count) {
+                        Pen myPen = new Pen(Color.Pink, 2); 
+                       
+                        Regex regex = new Regex(@"\(([^\)]+)\)");
 
-                }
-                else {
-                Button btn = sender as Button;
-                listBox1.Items.Add(input);
-                command.Clear();
-                    x = 0;
-                }
+                        try
+                        {
+                            String output = regex.Replace(lines[count], "");
+
+
+                            
+                            string line = lines[count];
+                           // string insideParentheses = Regex.Match(line, "([0-9][0-9][0-9])").Groups(0).ToString();
+                            switch (output.ToLower())
+                            {
+                                case "circle":
+                                    MessageBox.Show("You Drew a Circle", "Messgae");
+                                    g.DrawEllipse(myPen, 50, 50, 200, 100);
+                                    count++;
+                                    break;
+                                case "rectangle":
+                                    MessageBox.Show("You Drew a Rectangle", "Message");
+                                    g.DrawRectangle(myPen, 0, 0, 50, 20);
+                                    count++;
+                                    break;
+                                case "squear":
+                                    MessageBox.Show("You Drew a Rectangle", "Message");
+                                    g.DrawRectangle(myPen, 0, 30, 50, 50);
+                                    count++;
+                                    break;
+                                case "line":
+                                    MessageBox.Show("Your Drew a Line", "Message");
+                                    g.DrawLine(myPen, 0, 20, 20, 50);
+                                    count++;
+                                    break;
+                                case "clear":
+                                    g.Clear(Color.Transparent);
+                                    count++;
+                                    break;
+                                default:
+                                    MessageBox.Show(output + lines[count] + " not a Command", "MEessgae");
+                                    count++;
+                                    break;
+
+                            }
+                            display.Refresh();
+                        }
+                        catch 
+                        {
+                            count = lines.Length + 1;
+                        }
+                    } 
+                 
             }
         }
 
