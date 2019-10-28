@@ -19,8 +19,10 @@ namespace GPLA
     
     public partial class Form1 : Form
     {
-
-        private Pen pen = new Pen(Color.Pink, 2);
+        private Color col = Color.Black;
+        private Pen pen = new Pen(Color.Black, 2);
+        private Brush brush = new SolidBrush(Color.Black);
+        private int x=0, y=0;
 
         public Form1()
         {
@@ -30,121 +32,123 @@ namespace GPLA
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            String input = ControlePanel.Text;
-            if (input.Trim() == "")
-            {
-                MessageBox.Show("Enter a command", "ERROR");
-            }
-            else
-            {
-               String[] lines = ControlePanel.Lines.ToArray();
-               // MessageBox.Show(lines.ToString(), "test");
-                
-                ArrayList Currentline = new ArrayList();
-                String[] line;
-                int i = 0;
-
-                while (lines.Length != i) {
-
-                    line = lines[i].Split(' ');
-                    Currentline.Add(line);
-                    i++;
-                }
-                int count = 0;
-                using (var g = Graphics.FromImage(display.Image))
-                {
-                    while (lines.Length >= count)
-                    {
-                        
-
-                       Pen myPen = new Pen(Color.Pink, 2);
-                        
-                        try
-                        {
-                            string[] element = (String[])Currentline[count];
-                            int j = 0;
-                            switch (element[j].ToLower())
-                            {
-                                case "circle":
-                                    MessageBox.Show("You Drew a Circle", "Messgae");
-                                    int radius = int.Parse(element[1]);
-                                    Circle(radius);                                    
-                                    break;
-                                case "rectangle":
-                                    MessageBox.Show("You Drew a Rectangle", "Message");
-                                    int width = int.Parse(element[1]);
-                                    int hight = int.Parse(element[2]);
-                                    Rectangle(width, hight);
-                                                                       
-                                    break;
-                                case "squear":
-                                    MessageBox.Show("You Drew a Rectangle", "Message");
-                                    g.DrawRectangle(myPen, 0, 30, 50, 50);                                    
-                                    break;
-                                case "line":
-                                    MessageBox.Show("Your Drew a Line", "Message");
-                                    g.DrawLine(myPen, 0, 20, 20, 50);                                    
-                                    break;
-                                case "clear":
-                                    g.Clear(Color.Transparent);                                    
-                                    break;
-                                default:
-                                    MessageBox.Show(Currentline.ToString() + "line "+ lines[count] + " not a Command", "MEessgae");
-                                    break;
-
-                            }
-                            display.Refresh();
-                            myPen.Dispose();
-                            count++;
-                        }
-                        catch
-                        {
-                            count = lines.Length + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        private void Rectangle(int width, int hight)
+        private void check( ArrayList Currentline, String[]lines)
         {
             using (var g = Graphics.FromImage(display.Image))
             {
-                ; // get a reference to Graphics object
-                Pen myPen = new Pen(Color.Pink, 2);
-                g.DrawRectangle(myPen, 0, 0, width, hight);
-            }
-        }
-        private void Circle(int radius) 
-        {
-            using (var g = Graphics.FromImage(display.Image)) { 
-                          
-            g.DrawEllipse(pen, 50, 50, 2*radius, 2 * radius);
+                int count = 0;
+                while (lines.Length >= count)
+                {
+
+                    try
+                    {
+                        string[] element = (String[])Currentline[count];
+                        int j = 0;
+                        switch (element[j].ToLower())
+                        {
+                            case "circle":
+                               
+                                int radius = int.Parse(element[1]);
+                                new Circle(col,x,y,radius).draw(g,pen,brush);
+                                break;
+                            case "rectangle":
+                               
+                                int width = int.Parse(element[1]);
+                                int height = int.Parse(element[2]);
+                                new Rectangle(col,x,y,width, height).draw(g,pen,brush);
+
+                                break;
+                            case "squear":
+                               
+                                int side = int.Parse(element[1]);
+                                new Square(col, x, y,side ).draw(g,pen,brush);
+                                break;
+                            case "line":                                
+                                g.DrawLine(pen, x,y, int.Parse(element[1]), int.Parse(element[2]));
+                                break;
+                            case "pencolor":
+                                pen.Color = Color.FromName(element[1]);
+                                break;
+                            case "brushcolor":
+                               brush = new SolidBrush(Color.FromName(element[1]));
+                                break;
+                            case "clear":
+                                g.Clear(Color.Transparent);
+                                g.Dispose();
+                                break;
+                            case "setx":
+                                x = int.Parse(element[1]);
+                                break;
+                            case "sety":
+                                y = int.Parse(element[1]);
+                                break;
+                            case "setxy":
+                                x = int.Parse(element[1]);
+                                y = int.Parse(element[2]);
+                                break;
+                            default:
+                                MessageBox.Show(element[0]+ " not a Command", "MEessgae");
+                                break;
+
+                        }
+                       
+                    }
+                    catch
+                    {
+                        
+                    } count++;
+                    
+                }display.Refresh();
+                    pen.Dispose();
+                    brush.Dispose();
             }
         }
 
+        private void commandline_KeyDown(object sender, KeyEventArgs e)
+            {
+            if (e.KeyCode == Keys.Enter)
+            {
+                String input = commandline.Text;
+                if (input.Trim() == "")
+                {
+                    MessageBox.Show("Enter a command", "ERROR");
 
-        private void f11(object sender, KeyPressEventArgs e)
-        {
-            if (e.Equals(Keys.Enter) )
-            {   // need to chenck if run is used in bottom input if not do thing.
-                //move switch in to own methord called checker.
-                // need to remove run button and need change event.
-                Run.PerformClick();
+                }
+                else
+                {
+                    String[] line;
+                    String[] lines;
+
+                    ArrayList Currentline = new ArrayList();
+                    int i = 0;
+
+                    
+                    if (input.ToLower() == "run")
+                    {
+                        lines = ControlePanel.Lines.ToArray();
+                        while (lines.Length != i)
+                        {
+
+                            line = lines[i].Split(' ');
+                            Currentline.Add(line);
+                            i++;
+                        }
+
+                    }
+                    else
+                    {
+                        lines = commandline.Lines.ToArray();
+                        line = commandline.Text.Split(' ');
+                        Currentline.Add(line);
+                        i++;
+
+
+
+                    }
+                    check(Currentline, lines);
+                }
             }
-        }
-
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
+           
 
         }
     }
