@@ -9,20 +9,21 @@ namespace GPLA
 {
     class Triangle : Shape
     {
-        Point[] pnt;
-        public Triangle(Color colour, Point[] pnt) : base(colour)
+        readonly Point[] pnt;
+        public Triangle( Point[] pnt) 
         {
 
             this.pnt = pnt; 
         }
 
 
-        public override void draw(Graphics g, Pen pen, Brush brush)
+        public override void Draw(Graphics g, Pen pen, Brush brush)
         {
 
             g.DrawPolygon(pen, pnt);
+            g.FillPolygon(brush, pnt);
         }
-
+        
         
     }
 }

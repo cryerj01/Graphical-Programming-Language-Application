@@ -56,7 +56,7 @@
             this.commandline.Name = "commandline";
             this.commandline.Size = new System.Drawing.Size(303, 20);
             this.commandline.TabIndex = 8;
-            this.commandline.KeyDown += new System.Windows.Forms.KeyEventHandler(this.commandline_KeyDown);
+            this.commandline.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Commandline_KeyDown);
             // 
             // Form1
             // 

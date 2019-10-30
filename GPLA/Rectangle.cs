@@ -9,8 +9,10 @@ namespace GPLA
 {
     class Rectangle : Shape
     {
-        int width, height;
-        public Rectangle(Color colour, int x, int y, int width, int height) : base(colour, x, y)
+        private readonly int width;
+        private readonly int height;
+
+        public Rectangle( int x, int y, int width, int height) : base( x, y)
         {
 
             this.width = width; 
@@ -18,7 +20,7 @@ namespace GPLA
         }
 
 
-        public override void draw(Graphics g, Pen pen,Brush brush)
+        public override void Draw(Graphics g, Pen pen,Brush brush)
         { 
             g.FillRectangle(brush, x, y, width, height);
             g.DrawRectangle(pen, x, y, width, height);

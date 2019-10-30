@@ -10,23 +10,22 @@ namespace GPLA
     abstract class Shape
     {
 
-        protected Color colour;
+       
         protected int x, y; 
-        public Shape(Color colour, int x, int y)
+        public Shape( int x, int y)
         {
 
-            this.colour = colour; 
             this.x = x; 
             this.y = y; 
            
         }
 
-        protected Shape(Color colour)
+        protected Shape()
         {
-            this.colour = colour;
+           
         }
 
-        public abstract void draw(Graphics g, Pen pen, Brush brush); 
+        public abstract void Draw(Graphics g, Pen pen, Brush brush); 
 
         public override string ToString()
         {

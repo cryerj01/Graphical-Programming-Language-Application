@@ -9,19 +9,18 @@ namespace GPLA
 {
     class Circle : Shape
     {
-        int radius;
+        readonly int radius;
         
 
-        public Circle(Color colour, int x, int y, int radius):base(colour,x,y)
+        public Circle( int x, int y, int radius):base(x,y)
         {
-            this.x = x;
-            this.y = y;
+            
             this.radius = radius;
         }
 
        
 
-        public override void draw(Graphics g, Pen pen, Brush brush) { 
+        public override void Draw(Graphics g, Pen pen, Brush brush) { 
 
            
             g.FillEllipse(brush, x, y, radius * 2, radius * 2);

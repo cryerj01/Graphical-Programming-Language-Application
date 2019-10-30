@@ -9,16 +9,16 @@ namespace GPLA
 {
     class Square : Rectangle
     {
-        private int size;
-        public Square(Color colour, int x, int y, int size) : base(colour, x, y, size, size)
+        readonly int size;
+        public Square(int x, int y, int size) : base( x, y, size, size)
         {
             this.size = size;
         }
 
         
-        public override void draw(Graphics g,Pen pen, Brush brush)
+        public override void Draw(Graphics g,Pen pen, Brush brush)
         {
-            base.draw(g,pen,brush);
+            base.Draw(g,pen,brush);
         }
 
     }
