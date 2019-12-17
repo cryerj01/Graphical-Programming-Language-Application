@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GPLA",
+    "\\GPLATEST",
+    "\\GPLA\\savedfiles"
   ],
+  "SelectedNode": "\\GPLA\\Form1.Designer.cs",
   "PreviewInSolutionExplorer": false
 }
