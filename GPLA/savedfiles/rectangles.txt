@@ -1,0 +1,10 @@
+rectangle 210 100
+rectangle 220 90
+rectangle 230 80
+rectangle 240 70
+rectangle 250 60
+rectangle 260 50
+rectangle 270 40
+rectangle 280 30
+rectangle 290 20
+rectangle 300 10
