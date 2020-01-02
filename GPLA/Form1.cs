@@ -25,7 +25,10 @@ namespace GPLA
        
        
         private int x = 0, y = 0;
+        private int loopstart;
+        private int loopend;
         private  string[] vars = new string[50];
+        private string[] element;
         private int[] varsParams = new int[50];
         private int loopcount;
         private bool loopflag= false;
@@ -57,83 +60,83 @@ namespace GPLA
 
                 try
                     {
-                        string[] element = (String[])Currentline[count];
-                    
+                       element = (String[])Currentline[count];
 
-                        switch (element[0].ToLower())
-                        {
-                            case "circle":
 
-                                int radius;
-                                if (!int.TryParse(element[1], out radius))
-                                {
-                                   
-                                 radius = varCall((string)element[1]);
-                                    new Circle(x, y, radius).Draw(g, pen, brush);
-                                }
-                                else if(int.TryParse(element[1], out radius))
-                                {
-                                    int.TryParse(element[1], out radius);
+                    switch (element[0].ToLower())
+                    {
+                        case "circle":
+
+                            int radius;
+                            if (!int.TryParse(element[1], out radius))
+                            {
+
+                                radius = varCall((string)element[1]);
                                 new Circle(x, y, radius).Draw(g, pen, brush);
-                                }
+                            }
+                            else if (int.TryParse(element[1], out radius))
+                            {
+                                int.TryParse(element[1], out radius);
+                                new Circle(x, y, radius).Draw(g, pen, brush);
+                            }
                             else
                             {
                                 MessageBox.Show("enter a radius or use a variable", "error");
                             }
-                                break;
-                            case "rectangle":
+                            break;
+                        case "rectangle":
 
-                                int width;
+                            int width;
 
-                                int height;
-                                if (!int.TryParse(element[1], out width) || !int.TryParse(element[2], out height))
-                                {
+                            int height;
+                            if (!int.TryParse(element[1], out width) || !int.TryParse(element[2], out height))
+                            {
                                 width = varCall(element[1]);
                                 height = varCall(element[2]);
-                                    new Rectangle(x, y, width, height).Draw(g, pen, brush);
+                                new Rectangle(x, y, width, height).Draw(g, pen, brush);
 
-                                }
-                                else
-                                {
-                                    int.TryParse(element[1], out width);
-                                    int.TryParse(element[2], out height);
-                                    new Rectangle(x, y, width, height).Draw(g, pen, brush);
-                                }
-                                break;
-                            case "Square":
-                                int side;
-                                if (!int.TryParse(element[1], out side))
-                                {
+                            }
+                            else
+                            {
+                                int.TryParse(element[1], out width);
+                                int.TryParse(element[2], out height);
+                                new Rectangle(x, y, width, height).Draw(g, pen, brush);
+                            }
+                            break;
+                        case "Square":
+                            int side;
+                            if (!int.TryParse(element[1], out side))
+                            {
                                 side = varCall(element[1]);
-                                    new Square(x, y, side).Draw(g, pen, brush);
-                                }
-                                else
-                                {
-                                    int.TryParse(element[1], out side);
-                                    new Square(x, y, side).Draw(g, pen, brush);
-                                }
+                                new Square(x, y, side).Draw(g, pen, brush);
+                            }
+                            else
+                            {
+                                int.TryParse(element[1], out side);
+                                new Square(x, y, side).Draw(g, pen, brush);
+                            }
 
-                                break;
-                            case "line":
-                                int point1, point2;
-                                if (!int.TryParse(element[1], out point1) || !int.TryParse(element[2], out point2))
-                                {
-                              point1  = varCall(element[1]);
-                              point2 = varCall(element[2]);
+                            break;
+                        case "line":
+                            int point1, point2;
+                            if (!int.TryParse(element[1], out point1) || !int.TryParse(element[2], out point2))
+                            {
+                                point1 = varCall(element[1]);
+                                point2 = varCall(element[2]);
                                 g.DrawLine(pen, x, y, point1, point1);
 
-                                }
-                                else
-                                {
-                                    int.TryParse(element[1], out point1);
-                                    int.TryParse(element[2], out point2);
-                                    g.DrawLine(pen, x, y, point1, point2);
+                            }
+                            else
+                            {
+                                int.TryParse(element[1], out point1);
+                                int.TryParse(element[2], out point2);
+                                g.DrawLine(pen, x, y, point1, point2);
 
-                                }
-                                break;
-                            case "pencolor":
-                                try
-                                {
+                            }
+                            break;
+                        case "pencolor":
+                            try
+                            {
                                 if (element[1] != "rand")
                                 {
                                     pencol = Color.FromName(element[1]);
@@ -142,36 +145,36 @@ namespace GPLA
                                 {
                                     pencol = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
                                 }
-                                }
-                                catch
-                                {
-                                    pencol = Color.Black;
-                                }
-                                break;
-                            case "brushcolor":
-                                try
-                                {
+                            }
+                            catch
+                            {
+                                pencol = Color.Black;
+                            }
+                            break;
+                        case "brushcolor":
+                            try
+                            {
                                 if (element[1] != "rand")
                                 {
                                     brushcol = Color.FromName(element[1]);
                                 }
                                 else
                                 {
-                                   brushcol = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+                                    brushcol = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
 
                                 }
-                                     
-                                }
-                                catch
-                                {   
-                                    brushcol = Color.Black;
-                                }
-                                break;
-                            case "triangle":
-                                int p1, p2, p3;
 
-                                if (!int.TryParse(element[1], out p1) || !int.TryParse(element[2], out p2) || !int.TryParse(element[3], out p3))
-                                {
+                            }
+                            catch
+                            {
+                                brushcol = Color.Black;
+                            }
+                            break;
+                        case "triangle":
+                            int p1, p2, p3;
+
+                            if (!int.TryParse(element[1], out p1) || !int.TryParse(element[2], out p2) || !int.TryParse(element[3], out p3))
+                            {
                                 p1 = varCall(element[1]);
                                 p2 = varCall(element[2]);
                                 p3 = varCall(element[3]);
@@ -180,26 +183,26 @@ namespace GPLA
                                 System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
 
                                 System.Drawing.Point[] pnt = { pointa, pointb, pointc };
-                                    new Triangle(pnt).Draw(g, pen, brush);
-                                }
-                                else
-                                {
-                                    int.TryParse(element[1], out p1);
-                                    int.TryParse(element[2], out p2);
-                                    int.TryParse(element[3], out p3);
-                                    System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
-                                    System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
-                                    System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
+                                new Triangle(pnt).Draw(g, pen, brush);
+                            }
+                            else
+                            {
+                                int.TryParse(element[1], out p1);
+                                int.TryParse(element[2], out p2);
+                                int.TryParse(element[3], out p3);
+                                System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
+                                System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
+                                System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
 
-                                    System.Drawing.Point[] pnt = { pointa, pointb, pointc };
-                                    new Triangle(pnt).Draw(g, pen, brush);
-                                }
-                                break;
-                            case "clear":
-                                g.Clear(Color.Transparent);
-                                g.Dispose();
-                                break;
-                            case "setx":
+                                System.Drawing.Point[] pnt = { pointa, pointb, pointc };
+                                new Triangle(pnt).Draw(g, pen, brush);
+                            }
+                            break;
+                        case "clear":
+                            g.Clear(Color.Transparent);
+                            g.Dispose();
+                            break;
+                        case "setx":
                             if (int.TryParse(element[1], out x))
                             {
                                 int.TryParse(element[1], out x);
@@ -208,8 +211,8 @@ namespace GPLA
                             {
                                 x = varCall(element[1]);
                             }
-                                break;
-                            case "sety":
+                            break;
+                        case "sety":
                             if (int.TryParse(element[1], out y))
                             {
                                 int.TryParse(element[1], out y);
@@ -219,9 +222,9 @@ namespace GPLA
                                 y = varCall(element[1]);
                             }
                             break;
-                            case "setxy":
+                        case "setxy":
 
-                            if (int.TryParse(element[1], out x)&& int.TryParse(element[2], out y))
+                            if (int.TryParse(element[1], out x) && int.TryParse(element[2], out y))
                             {
                                 int.TryParse(element[1], out x);
                                 int.TryParse(element[2], out y);
@@ -232,17 +235,18 @@ namespace GPLA
                                 y = varCall(element[2]);
                             }
 
-                                break;
+                            break;
 
-                            case "var":
-                                VarCheck(element[1], element[2]);
-                                break;
+                        case "var":
+                            VarCheck(element[1], element[2]);
+                            break;
                         case "loop":
                             loopflag = true;
                             loopmax = 0;
-                            loopcount=0;
-                            int next = count;
-                                if(int.TryParse(element[1], out loopmax))
+                            loopcount = 0;
+                            loopstart = count;
+                           
+                            if (int.TryParse(element[1], out loopmax))
                             {
                                 int.TryParse(element[1], out loopmax);
                             }
@@ -250,48 +254,37 @@ namespace GPLA
                             {
                                 loopmax = varCall(element[1]);
                             }
-                                next++;
-                                int k = 0;
-                                string[] looplines = new string[50];
-                                string lineloopread = null;
-                                ArrayList loopedcommands = new ArrayList();
-                               
-                                    while (next != Currentline.Count)
-                                    {
-
-                                        if (lines[next] == "end")
-                                        {
-                                        loopcount++;
-                                    
-                                    if (loopflag == true)
-                                    {
-                                        loopcount = 0;
-
-                                        while (loopcount < loopmax)
-                                        {
-                                            int lengh = looplines.Length;
-                                            Check(loopedcommands, looplines, lengh);
-                                            loopcount++;
-                                            display.Refresh();
-                                        }
-
-                                    }
+                           
+                                if (lines[count] == "end" && loopcount != loopmax)
+                                {
+                                    count = loopend;
                                     loopflag = false;
-                                        next++;
-                                        }
-                                        else
-                                        {
-                                            lineloopread = Currentline[next].ToString();
-                                            looplines[k] = lineloopread;
-                                            loopedcommands.Add(Currentline[next]);
-                                            next++;
-                                            k++;
-                                        }
-                                        
-                                    }
-                                
                                 break;
+                                }
+                                else if (lines[count] == "end" && loopcount != loopmax)
+                                {
+                                    loopcount++;
+                                loopend = count++;
+                                    count = loopstart;
+                                count++;
+                                break;
+                                  
+                                }
+                                else
+                                {
+                                    loopcount++;
+                                break;
+                                }
                             case "end":
+                            if(loopcount == loopmax || loopcount >loopmax)
+                            {
+                            
+                            }
+                            else
+                            {
+                                count = loopstart;
+                            }
+                           
 
                                 break;
                         case "factory":
@@ -372,6 +365,10 @@ namespace GPLA
                                 break;
                             
                         }
+                    if (loopflag == true)
+                    {
+                        loopcount++;
+                    }
                           display.Refresh();
 
                    }
@@ -381,9 +378,10 @@ namespace GPLA
                     }
                     pen.Dispose();
                     brush.Dispose();
-                    count++;
 
-                }
+                
+                count++;
+            }
                
              
                 
