@@ -1,0 +1,2 @@
+var rad 200
+circle rad

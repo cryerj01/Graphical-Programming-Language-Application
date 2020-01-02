@@ -1,0 +1,22 @@
+loop 200000
+rectangle 210 100
+brushcolor rand
+rectangle 220 90
+brushcolor rand
+rectangle 230 80
+brushcolor rand
+rectangle 240 70
+brushcolor rand
+rectangle 250 60
+brushcolor rand
+rectangle 260 50
+brushcolor rand
+rectangle 270 40
+brushcolor rand
+rectangle 280 30
+brushcolor rand
+rectangle 290 20
+brushcolor rand
+rectangle 300 10
+brushcolor rand
+end

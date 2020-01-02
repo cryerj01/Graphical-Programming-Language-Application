@@ -14,3 +14,5 @@ C:\Users\FiercePC\Desktop\GPLA\GPLA_Tests\obj\Debug\GPLA_Tests.csprojAssemblyRef
 C:\Users\FiercePC\Desktop\GPLA\GPLA_Tests\obj\Debug\GPLA_Tests.csproj.CopyComplete
 C:\Users\FiercePC\Desktop\GPLA\GPLA_Tests\obj\Debug\GPLA_Tests.dll
 C:\Users\FiercePC\Desktop\GPLA\GPLA_Tests\obj\Debug\GPLA_Tests.pdb
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\obj\Debug\GPLA_Tests.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\obj\Debug\GPLA_Tests.pdb
