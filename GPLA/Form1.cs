@@ -25,10 +25,10 @@ namespace GPLA
        
        
         private int x = 0, y = 0;
-        private int loopcount= 0;
-       // private static int varCount = 0;
         private  string[] vars = new string[50];
-        private  int[] varsParams = new int[50];
+        private int[] varsParams = new int[50];
+        private int loopcount;
+        private bool loopflag= false;
         private Color pencol = Color.Black;
         private Color brushcol = Color.Cyan;
         private Random rnd = new Random();
@@ -168,6 +168,7 @@ namespace GPLA
                                 break;
                             case "triangle":
                                 int p1, p2, p3;
+
                                 if (!int.TryParse(element[1], out p1) || !int.TryParse(element[2], out p2) || !int.TryParse(element[3], out p3))
                                 {
                                 p1 = varCall(element[1]);
@@ -235,8 +236,10 @@ namespace GPLA
                             case "var":
                                 VarCheck(element[1], element[2]);
                                 break;
-                            case "loop":
+                        case "loop":
+                           
                                 int loopmax = 0;
+                                    loopcount=0;
                                 int next = count;
                                 if(int.TryParse(element[1], out loopmax))
                             {
@@ -250,20 +253,17 @@ namespace GPLA
                                 next++;
                                 int k = 0;
                                 string[] looplines = new string[50];
-                            string lineloopread = null;
+                                string lineloopread = null;
                                 ArrayList loopedcommands = new ArrayList();
-                                if (loopcount == loopmax)
-                                {
-                                }
-                                else { 
-                                    while (next < Currentline.Count)
+                               
+                                    while (next != Currentline.Count)
                                     {
 
                                         if (lines[next] == "end")
                                         {
-                                            int loopcount = next;
-                                            lopper(loopedcommands, looplines, loopcount);
-                                        next++;
+                                        loopcount++;
+                                        lopper(loopedcommands, looplines, loopmax);
+                                       
                                         }
                                         else
                                         {
@@ -273,13 +273,50 @@ namespace GPLA
                                             next++;
                                             k++;
                                         }
-
+                                        
                                     }
-                                }
+                                
                                 break;
                             case "end":
 
                                 break;
+                        case "factory":
+
+                            x = rnd.Next(display.Width);
+                            y = rnd.Next(display.Height);
+                           
+                            width = rnd.Next(display.Width);
+                            height = rnd.Next(display.Height);
+
+                            brushcol =Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+                            pencol = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+
+                            switch (element[1].ToLower().Trim())
+                            {
+                                case "circle":
+                                    radius = rnd.Next(display.Width / 4);
+                                    new Circle(x, y, radius).Draw(g, pen, brush);
+                                    break;
+                                case "rectangle":
+                                    width = rnd.Next(display.Width);
+                                    height = rnd.Next(display.Height);
+                                    new Rectangle(x, y, width, height).Draw(g, pen, brush);
+                                    break;
+                                case "triangle":
+                                    p1 = rnd.Next(display.Width);
+                                    p2 = rnd.Next(display.Width);
+                                    p3 = rnd.Next(display.Width);
+
+                                    System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
+                                    System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
+                                    System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
+
+                                    System.Drawing.Point[] pnt = { pointa, pointb, pointc };
+                                    new Triangle(pnt).Draw(g, pen, brush);
+
+                                    break;
+                            }
+                            break;
                             default: 
                                 if (element[0].Trim() == null)
                                 {
@@ -338,24 +375,22 @@ namespace GPLA
                 
         }
 
-        private void lopper(ArrayList loopedcommands, string[] looplines ,int count)
+        private void lopper(ArrayList loopedcommands, string[] looplines ,int loopmax)
         {
-
             string[] looplengh = new string[100];
-           
-            int x = 0;
-            if (loopcount < count)
-            {
-                while (x < count)
+            loopcount = 0;
+            if (loopcount < loopmax)
+            {                 
+                while (loopcount < loopmax)
                 {
-                    looplengh[x] = "1";
-                    x++;
-                }
-                int lengh = looplines.Length;
-                Check(loopedcommands, looplines, lengh);
-                loopcount++;
-            }
-            
+                    int lengh = looplines.Length;
+                    Check(loopedcommands, looplines, lengh);
+                    loopcount++;
+                    label1.Text = "loop count" + loopcount;
+                    display.Refresh();
+                }             
+                                
+            }            
         }
 
         private void VarCheck(string element1, string element2)
@@ -397,11 +432,11 @@ namespace GPLA
                         }
                     }
                 }
-              //  MessageBox.Show("var created", "DING DING DING!!!");
+            
             }
             catch
             {
-             //   MessageBox.Show("DIDNT LIKE SOMETHING ", "ERROR!!");
+           
             }
             
         }
@@ -409,7 +444,7 @@ namespace GPLA
         private int  varCall(string variable)
         {
             int i = 0;
-            int number = 0;
+            int number = -1;
             while (49 >= i)
             {
                 if (vars[i] == variable)

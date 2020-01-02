@@ -15,3 +15,4 @@ C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Debug\GPLA.Properties.Resources.reso
 C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Debug\GPLA.csproj.GenerateResource.cache
 C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Debug\GPLA.exe
 C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Debug\GPLA.pdb
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Debug\GPLA.csprojAssemblyReference.cache
