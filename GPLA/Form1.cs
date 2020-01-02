@@ -29,6 +29,7 @@ namespace GPLA
         private int[] varsParams = new int[50];
         private int loopcount;
         private bool loopflag= false;
+        private int loopmax;
         private Color pencol = Color.Black;
         private Color brushcol = Color.Cyan;
         private Random rnd = new Random();
@@ -237,10 +238,10 @@ namespace GPLA
                                 VarCheck(element[1], element[2]);
                                 break;
                         case "loop":
-                           
-                                int loopmax = 0;
-                                    loopcount=0;
-                                int next = count;
+                            loopflag = true;
+                            loopmax = 0;
+                            loopcount=0;
+                            int next = count;
                                 if(int.TryParse(element[1], out loopmax))
                             {
                                 int.TryParse(element[1], out loopmax);
@@ -249,7 +250,6 @@ namespace GPLA
                             {
                                 loopmax = varCall(element[1]);
                             }
-
                                 next++;
                                 int k = 0;
                                 string[] looplines = new string[50];
@@ -262,8 +262,22 @@ namespace GPLA
                                         if (lines[next] == "end")
                                         {
                                         loopcount++;
-                                        lopper(loopedcommands, looplines, loopmax);
-                                       
+                                    
+                                    if (loopflag == true)
+                                    {
+                                        loopcount = 0;
+
+                                        while (loopcount < loopmax)
+                                        {
+                                            int lengh = looplines.Length;
+                                            Check(loopedcommands, looplines, lengh);
+                                            loopcount++;
+                                            display.Refresh();
+                                        }
+
+                                    }
+                                    loopflag = false;
+                                        next++;
                                         }
                                         else
                                         {
@@ -375,23 +389,7 @@ namespace GPLA
                 
         }
 
-        private void lopper(ArrayList loopedcommands, string[] looplines ,int loopmax)
-        {
-            string[] looplengh = new string[100];
-            loopcount = 0;
-            if (loopcount < loopmax)
-            {                 
-                while (loopcount < loopmax)
-                {
-                    int lengh = looplines.Length;
-                    Check(loopedcommands, looplines, lengh);
-                    loopcount++;
-                    label1.Text = "loop count" + loopcount;
-                    display.Refresh();
-                }             
-                                
-            }            
-        }
+       
 
         private void VarCheck(string element1, string element2)
         {
