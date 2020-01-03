@@ -22,21 +22,26 @@ namespace GPLA
     public partial class Form1 : Form
     {
 
-       
-       
-        private int x = 0, y = 0;
-        private int loopstart;
-        private int loopend;
-        private  string[] vars = new string[50];
-        private string[] element;
-        private int[] varsParams = new int[50];
-        private int loopcount;
-        private bool loopflag= false;
-        private int loopmax;
-        private Color pencol = Color.Black;
-        private Color brushcol = Color.Cyan;
-        private Random rnd = new Random();
+        private int x = 0, y = 0;//default draw position
+        private int loopmax;//used in loop
+        private int loopstart;//used in loop
+        private int loopend; //used in loop
+        private int loopcount;//used in loop
+        
+        private string[] element; //used to see each part of the commandes inputted in the checker
+        private  string[] vars = new string[50];    //stores the variables names
+        private int[] varsParams = new int[50];   //stores the varables numbers in the corrsponding position to vars
 
+        private bool loopflag= false;//used in loop
+        private bool ifResult = false;//used in the if checker
+        private bool iffaslse = false;//used to skip the line not used in the if
+
+        private Color pencol = Color.Black;//universal colour for pen
+        private Color brushcol = Color.Cyan;// universal colour for brush
+        private Random rnd = new Random();//used to make random number for colour changes and factory shapes
+
+        private Shape shape1;
+        private factory factory = new factory();
 
         public Form1()
         {
@@ -178,31 +183,31 @@ namespace GPLA
                                 p1 = varCall(element[1]);
                                 p2 = varCall(element[2]);
                                 p3 = varCall(element[3]);
-                                System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
-                                System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
-                                System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
+                                System.Drawing.Point pointa1 = new System.Drawing.Point(p1, p2);
+                                System.Drawing.Point pointb1 = new System.Drawing.Point(p2, p3);
+                                System.Drawing.Point pointc1 = new System.Drawing.Point(p3, p1);
 
-                                System.Drawing.Point[] pnt = { pointa, pointb, pointc };
-                                new Triangle(pnt).Draw(g, pen, brush);
+                                System.Drawing.Point[] pnt1 = { pointa1, pointb1, pointc1 };
+                                new Triangle(pnt1).Draw(g, pen, brush);
                             }
                             else
                             {
                                 int.TryParse(element[1], out p1);
                                 int.TryParse(element[2], out p2);
                                 int.TryParse(element[3], out p3);
-                                System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
-                                System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
-                                System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
-
-                                System.Drawing.Point[] pnt = { pointa, pointb, pointc };
-                                new Triangle(pnt).Draw(g, pen, brush);
+                                System.Drawing.Point pointa1 = new System.Drawing.Point(p1, p2);
+                                System.Drawing.Point pointb1 = new System.Drawing.Point(p2, p3);
+                                System.Drawing.Point pointc1 = new System.Drawing.Point(p3, p1);
+                                
+                                System.Drawing.Point[] pnt1 = { pointa1, pointb1, pointc1 };
+                                new Triangle(pnt1).Draw(g, pen, brush);
                             }
                             break;
                         case "clear":
                             g.Clear(Color.Transparent);
                             g.Dispose();
                             break;
-                        case "setx":
+                        case "movex":
                             if (int.TryParse(element[1], out x))
                             {
                                 int.TryParse(element[1], out x);
@@ -212,7 +217,7 @@ namespace GPLA
                                 x = varCall(element[1]);
                             }
                             break;
-                        case "sety":
+                        case "movey":
                             if (int.TryParse(element[1], out y))
                             {
                                 int.TryParse(element[1], out y);
@@ -222,7 +227,7 @@ namespace GPLA
                                 y = varCall(element[1]);
                             }
                             break;
-                        case "setxy":
+                        case "moveto":
 
                             if (int.TryParse(element[1], out x) && int.TryParse(element[2], out y))
                             {
@@ -288,43 +293,88 @@ namespace GPLA
 
                                 break;
                         case "factory":
-
+                            // factory Shape = new factory;
+                            
                             x = rnd.Next(display.Width);
                             y = rnd.Next(display.Height);
+                            
                            
-                            width = rnd.Next(display.Width);
-                            height = rnd.Next(display.Height);
-
                             brushcol =Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
-                            pencol = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+                            pencol = Color.Black;
 
-                            switch (element[1].ToLower().Trim())
-                            {
-                                case "circle":
-                                    radius = rnd.Next(display.Width / 4);
-                                    new Circle(x, y, radius).Draw(g, pen, brush);
-                                    break;
-                                case "rectangle":
-                                    width = rnd.Next(display.Width);
-                                    height = rnd.Next(display.Height);
-                                    new Rectangle(x, y, width, height).Draw(g, pen, brush);
-                                    break;
-                                case "triangle":
-                                    p1 = rnd.Next(display.Width);
-                                    p2 = rnd.Next(display.Width);
-                                    p3 = rnd.Next(display.Width);
-
-                                    System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
-                                    System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
-                                    System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
-
-                                    System.Drawing.Point[] pnt = { pointa, pointb, pointc };
-                                    new Triangle(pnt).Draw(g, pen, brush);
-
-                                    break;
+                            shape1 = factory.getShape(element[1]);
+                        if (element[1].ToLower().Trim()=="circle")
+                            {                             
+                                radius = rnd.Next(Size.Width / 4);
+                                shape1.set(x, y, radius);                                                          
                             }
+                            else if(element[1].ToLower().Trim()=="rectangle") 
+                            {   width = rnd.Next(display.Width);
+                            height = rnd.Next(display.Height);                              
+                                shape1.set(x, y, width,height);
+                            }
+                            else if (element[1].ToLower().Trim() == "triangle")
+                            {    
+                                p1 = rnd.Next(display.Width);
+                            p2 = rnd.Next(display.Width);
+                            p3 = rnd.Next(display.Width);
+                            System.Drawing.Point pointa = new System.Drawing.Point(p1, p2);
+                            System.Drawing.Point pointb = new System.Drawing.Point(p2, p3);
+                            System.Drawing.Point pointc = new System.Drawing.Point(p3, p1);
+                            System.Drawing.Point[] pnt = { pointa, pointb, pointc };                             
+                                shape1.setTriangle(x, y, pnt);
+                            }
+                            shape1.Draw(g, pen, brush);
+                            display.Refresh();
                             break;
-                            default: 
+                        case "if":
+                            int left;
+                            int right;
+                            string condition;
+                            if (element.Length > 4)
+                            {
+                                MessageBox.Show("need more input", "Error");
+                            }
+                            else
+                            {
+                                if (!int.TryParse(element[1], out left))
+                                {
+                                    left = varCall(element[1]);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("not a number!!", "Error");
+                                }
+                                
+                                if (!int.TryParse(element[1], out right))
+                                {
+                                int.TryParse(element[3], out right);
+                                }
+                                else
+                                {
+                                MessageBox.Show("not a number!!", "Error");
+                                }
+                                condition = element[2];
+                                ifcheck(left, condition, right);
+                                if (ifResult == true)
+                                {
+                                    iffaslse = true;
+                                    MessageBox.Show("If statment is true","Whoop!!");
+                                    break;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("If statment is not true", "SHIT!!");
+                                    count++;
+                                }
+
+
+                                
+                                
+                            }
+
+                            break;
+                       default: 
                                 if (element[0].Trim() == null)
                                 {
 
@@ -372,9 +422,8 @@ namespace GPLA
                           display.Refresh();
 
                    }
-                    catch
+                   catch
                    {
-                  
                     }
                     pen.Dispose();
                     brush.Dispose();
@@ -387,6 +436,84 @@ namespace GPLA
                 
         }
 
+        private bool ifcheck(int left,string condition,int right)
+        {
+            switch (condition)
+            {
+
+                case "==":
+                    if (left == right)
+                    {
+                        ifResult = true;
+                    }
+                    else
+                    {
+                        ifResult = false;
+                    }
+                    break;
+                case ">":
+                    if (left > right)
+                    {
+                        ifResult = true;
+                    }
+                    else
+                    {
+                        ifResult = false;
+                    }
+
+                    break;
+                case "<":
+                    if (left < right)
+                    {
+                        ifResult = true;
+                    }
+                    else
+                    {
+                        ifResult = false;
+                    }
+
+                    break;
+                case "!=":
+                    if (left != right)
+                    {
+                        ifResult = true;
+                    }
+                    else
+                    {
+                        ifResult = false;
+                    }
+
+                    break;
+                case ">=":
+                    if (left >= right)
+                    {
+                        ifResult = true;
+                    }
+                    else
+                    {
+                        ifResult = false;
+                    }
+
+                    break;
+                case "<=":
+                    if (left <= right)
+                    {
+                        ifResult = true;
+                    }
+                    else
+                    {
+                        ifResult = false;
+                    }
+
+                    break;
+                default:
+
+                    break;
+
+            }
+
+            return ifResult;
+        }
        
 
         private void VarCheck(string element1, string element2)

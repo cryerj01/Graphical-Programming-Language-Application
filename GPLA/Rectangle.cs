@@ -9,8 +9,8 @@ namespace GPLA
 {
     class Rectangle : Shape
     {
-        private readonly int width;
-        private readonly int height;
+        private int width;
+        private int height;
 
         public Rectangle( int x, int y, int width, int height) : base( x, y)
         {
@@ -18,7 +18,13 @@ namespace GPLA
             this.width = width; 
             this.height = height;
         }
-
+        public Rectangle() { }
+        public override void set(params int[] list)
+        {
+            base.set(list[0], list[1]);
+            this.width = width;
+            this.height = height;
+        }
 
         public override void Draw(Graphics g, Pen pen,Brush brush)
         { 

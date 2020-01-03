@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GPLA
 {
-    abstract class Shape
+    abstract class Shape : Shapesinterface
     {
 
        
@@ -20,9 +20,22 @@ namespace GPLA
            
         }
 
-        protected Shape()
+        public Shape() 
         {
-           
+        }
+
+        public virtual void set( params int[] list)
+        {
+            
+            this.x = list[0];
+            this.y = list[1];
+          
+        }
+       public virtual void setTriangle(int x,int y,Point[] points)
+        {
+            this.x = x;
+            this.y = y;
+            
         }
 
         public abstract void Draw(Graphics g, Pen pen, Brush brush); 
@@ -32,5 +45,6 @@ namespace GPLA
             return base.ToString() + "    " + this.x + "," + this.y + " : ";
         }
 
+      
     }
 }
