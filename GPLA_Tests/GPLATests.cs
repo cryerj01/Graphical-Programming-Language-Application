@@ -23,8 +23,9 @@ namespace GPLA_Tests
                 Currentline.Add(line);
                 i++;
             }
+            int linecount = 4;
             Form1 test = new Form1();
-            test.Check(Currentline, lines);
+            test.excicute(Currentline, lines,linecount);
 
         }
         [TestMethod]
@@ -40,22 +41,88 @@ namespace GPLA_Tests
                 Currentline.Add(line);
                 i++;
             }
+            int linecount = 4;
             Form1 test = new Form1();
-            test.Check(Currentline, lines);
+            test.excicute(Currentline, lines, linecount);
 
+
+        }
+       
+        
+
+        [TestMethod]
+        public void exicuteWorkswithErrors()
+        {
+            ArrayList Currentline = new ArrayList();
+            String[] lines = { "Circle 12j", "Square j1ho2 ", "Rectangle 12b", "Triangle 100 200 150" };
+            string[] line;
+            int i = 0;
+            while (lines.Length > i)
+            {
+                line = lines[i].Split(' ');
+                Currentline.Add(line);
+                i++;
+            }
+            int linecount = 4;
+            Form1 test = new Form1();
+            test.Check(Currentline, lines, linecount);
+        }
+
+        [TestMethod]
+
+        public void loopAndFactoryWork()
+        {
+            ArrayList Currentline = new ArrayList();
+            String[] lines = { "loop 2000", "Factory Circle", "end" };
+            string[] line;
+            int i = 0;
+            while (lines.Length > i)
+            {
+                line = lines[i].Split(' ');
+                Currentline.Add(line);
+                i++;
+            }
+            int linecount = 3;
+            Form1 test = new Form1();
+            test.excicute(Currentline, lines, linecount);
 
         }
         [TestMethod]
-        public void runs_commandline_on_enter()
+        public void ifstatmentworks()
         {
-            object s=null;
-            Keys k = new Keys();
-            k = Keys.Enter;
+            ArrayList Currentline = new ArrayList();
+            String[] lines = { "if 10 > 20", "brushcolor green", "brishcolor red", "circle 100" };
+            string[] line;
+            int i = 0;
+            while (lines.Length > i)
+            {
+                line = lines[i].Split(' ');
+                Currentline.Add(line);
+                i++;
+            }
+            int linecount = 3;
             Form1 test = new Form1();
-            
-           // test.Commandline_KeyDown(s, (KeyEventArgs)k ); cant simulate keypress.
-            
+            test.excicute(Currentline, lines, linecount);
+
         }
 
+        [TestMethod]
+        public void factoryshpaeswork()
+        {
+            ArrayList Currentline = new ArrayList();
+            String[] lines = { "factory rectangle", "Factory Circle", "factory triangle" };
+            string[] line;
+            int i = 0;
+            while (lines.Length > i)
+            {
+                line = lines[i].Split(' ');
+                Currentline.Add(line);
+                i++;
+            }
+            int linecount = 3;
+            Form1 test = new Form1();
+            test.excicute(Currentline, lines, linecount);
+        }
+        
     }
 }

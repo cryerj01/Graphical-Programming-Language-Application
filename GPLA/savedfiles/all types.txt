@@ -1,0 +1,15 @@
+var a 10
+a 20
+circle 100
+loop 20
+factory circle
+end
+if a = 10
+brushcolor green
+brushcolor red
+triangle 100 150 0
+if a = 20
+brushcolor green
+brushcolor red
+moveto 0 0
+rectangle 20 30

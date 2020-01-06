@@ -57,6 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\GPLA\GPLA.csproj">
       <Project>{4af0159a-d9ad-495d-8cf7-a88136a01e7e}</Project>
       <Name>GPLA</Name>

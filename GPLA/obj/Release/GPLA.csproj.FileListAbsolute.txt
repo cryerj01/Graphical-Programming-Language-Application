@@ -1,0 +1,9 @@
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\bin\Release\GPLA.exe.config
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\bin\Release\GPLA.exe
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\bin\Release\GPLA.pdb
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Release\GPLA.csprojAssemblyReference.cache
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Release\GPLA.Form1.resources
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Release\GPLA.Properties.Resources.resources
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Release\GPLA.csproj.GenerateResource.cache
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Release\GPLA.exe
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA\obj\Release\GPLA.pdb

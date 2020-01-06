@@ -1,0 +1,16 @@
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\GPLA_Tests.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\GPLA_Tests.pdb
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\GPLA.exe
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\GPLA.pdb
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\GPLA.exe.config
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\obj\Release\GPLA_Tests.csprojAssemblyReference.cache
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\obj\Release\GPLA_Tests.csproj.CopyComplete
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\obj\Release\GPLA_Tests.dll
+C:\Users\Joe\Documents\GitHub\GPLA\GPLA_Tests\obj\Release\GPLA_Tests.pdb
